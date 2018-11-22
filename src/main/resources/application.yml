@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 2111703401
+    url: mysql://47.107.108.7/tests?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
+  redis:
+    host: 47.107.108.7
+    port: 6379
+server:
+  servlet:
+    context-path: /sell
