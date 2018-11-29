@@ -15,3 +15,9 @@ spring:
 server:
   servlet:
     context-path: /sell
+  port: 8080
+wechat:
+  mpAppId: dasdsadas
+  mpAppSecret: we13213sadsadas
+project-url:
+  wechatMpAuthorize: dsaddas
