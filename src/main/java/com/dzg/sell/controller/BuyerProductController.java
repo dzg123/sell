@@ -51,7 +51,7 @@ public class BuyerProductController {
             productVOList.add(productVO);
 
         }
-        ResultVO<Object> resultVO = ResultVO.builder().msg("ok").code(200).data(productVOList).build();
+        ResultVO<Object> resultVO = ResultVO.builder().msg("成功").code(0).data(productVOList).build();
         return resultVO;
     }
 }

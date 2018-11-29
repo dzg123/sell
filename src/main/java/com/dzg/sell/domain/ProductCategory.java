@@ -14,10 +14,10 @@ import java.util.Date;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @DynamicUpdate
 @Builder
+@NoArgsConstructor
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
