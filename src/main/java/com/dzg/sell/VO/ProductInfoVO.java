@@ -6,19 +6,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-/**  
- *       
+
+/**
+ * @param
  * @author dzg  商品详情
  * @date 2018/11/23 10:35
- * @param    
- * @return   
- */ 
+ * @return
+ */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductInfoVO {
+public class ProductInfoVO implements Serializable {
+
+    private static final long serialVersionUID = -5464828208218822518L;
     @JsonProperty("id")
     private String productId;
     @JsonProperty("name")

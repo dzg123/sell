@@ -1,7 +1,11 @@
 package com.dzg.sell.dto;
 
 import com.dzg.sell.domain.OrderDetail;
+import com.dzg.sell.enums.OrderStatusEnum;
+import com.dzg.sell.enums.PayStatusEnum;
+import com.dzg.sell.utils.EnumUtil;
 import com.dzg.sell.utils.serializer.Date2LongSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
@@ -44,4 +48,12 @@ public class OrderDTO {
     private Date updateTime;
 
     List<OrderDetail> orderDetailList;
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum(){
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum(){
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
 }

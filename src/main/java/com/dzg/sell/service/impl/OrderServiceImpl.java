@@ -13,8 +13,10 @@ import com.dzg.sell.exception.SellException;
 import com.dzg.sell.repository.OrderDetailRepository;
 import com.dzg.sell.repository.OrderMasterRepository;
 import com.dzg.sell.service.OrderService;
+import com.dzg.sell.service.PayService;
 import com.dzg.sell.service.ProductService;
 import com.dzg.sell.utils.KeyUtil;
+import com.dzg.sell.websocket.SellWebSocket;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,12 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailRepository orderDetailRepository;
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+    @Autowired
+    private PayService payService;
+    @Autowired
+    private PushMessageServiceImpl pushMessageService;
+    @Autowired
+    private SellWebSocket webSocket;
 
     @Override
     @Transactional
@@ -75,6 +83,7 @@ public class OrderServiceImpl implements OrderService {
                 e.getProductQuantity())).collect(Collectors.toList());
         productService.decreaseStock(cartDTOList);
         //发送websocket消息
+        webSocket.sendMessage(orderDTO.getOrderId());
         return orderDTO;
     }
 
@@ -129,7 +138,7 @@ public class OrderServiceImpl implements OrderService {
         productService.increaseStock(cartDTOList);
 //        //如果已支付, 需要退款
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
-            //todo
+            payService.refund(orderDTO);
         }
 
         return orderDTO;
@@ -153,6 +162,7 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
         //推送微信模版消息
+        pushMessageService.orderStatus(orderDTO);
         return orderDTO;
     }
 

@@ -4,9 +4,7 @@ spring:
     username: root
     password: 2111703401
     url: jdbc:mysql://47.107.108.7/tests?characterEncoding=utf-8&useSSL=false
-  jpa:
-    show-sql: true
-    open-in-view: true
+
   jackson:
     default-property-inclusion: non_null
   redis:

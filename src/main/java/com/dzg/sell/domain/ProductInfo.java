@@ -1,5 +1,8 @@
 package com.dzg.sell.domain;
 
+import com.dzg.sell.enums.ProductStatusEnum;
+import com.dzg.sell.utils.EnumUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,7 +47,7 @@ public class ProductInfo {
     /**
      * 状态, 0正常1下架.
      */
-    private Integer productStatus ;
+    private Integer productStatus = ProductStatusEnum.UP.getCode();
 
     /**
      * 类目编号.
@@ -54,5 +57,10 @@ public class ProductInfo {
     private Date createTime;
 
     private Date updateTime;
+
+    @JsonIgnore
+    public ProductStatusEnum getProductStatusEnum() {
+        return EnumUtil.getByCode(productStatus, ProductStatusEnum.class);
+    }
 
 }

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,7 +20,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductVO{
+public class ProductVO implements Serializable{
+    private static final long serialVersionUID = -602795552833669518L;
     @JsonProperty("name")
     private String categoryName;
     @JsonProperty("type")
